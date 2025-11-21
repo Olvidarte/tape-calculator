@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>防護包整理計算機 v1.5</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f6f8;
+      color: #1f2933;
+    }
+
+    /* ===== CREAT 深藍 Header ===== */
+    .creat-header {
+      width: 100%;
+      background: #0f1e3b; /* 深藍 */
+      color: white;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .creat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .creat-logo {
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+      background: none;
+      padding: 4px;
+      border-radius: 50%;
+      border: none;
+    }
+
+    .creat-header-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .creat-header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1.2;
+    }
+
+    .creat-maker {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .creat-role {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .creat-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 16px;
+      }
+
+      .creat-header-right {
+        align-items: flex-start;
+      }
+
+      .creat-header-title {
+        font-size: 18px;
+      }
+
+      .creat-logo {
+        height: 48px;
+      }
+    }
+
+    /* ===== 主內容區樣式 ===== */
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 24px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-note {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    label {
+      font-size: 13px;
+      display: block;
+      margin-bottom: 4px;
+      color: #374151;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px 16px;
+    }
+
+    .plan-table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      background: white;
+    }
+
+    thead {
+      background: #e5e7eb;
+    }
+
+    th, td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 12px;
+      color: #374151;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      gap: 6px;
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-secondary:hover {
+      background: #d1d5db;
+    }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .btn-danger:hover {
+      background: #fecaca;
+    }
+
+    .btn + .btn {
+      margin-left: 8px;
+    }
+
+    .btn-icon {
+      font-size: 14px;
+    }
+
+    .actions-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .output-table {
+      margin-top: 8px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      margin-left: 8px;
+    }
+
+    .empty-text {
+      font-size: 13px;
+      color: #9ca3af;
+      padding: 4px 0 6px;
+    }
+
+    .history-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .small-text {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .history-list {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .history-card {
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .history-card-header {
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background: #f3f4f6;
+    }
+
+    .history-header-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .history-title-line {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .history-sub-line {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .history-toggle-icon {
+      font-size: 16px;
+      margin-left: 8px;
+    }
+
+    .history-card-body {
+      display: none;
+      padding: 10px 12px 12px;
+      font-size: 12px;
+    }
+
+    .history-section-title {
+      font-weight: 600;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .history-mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-size: 11px;
+    }
+
+    .history-mini-table th,
+    .history-mini-table td {
+      border: 1px solid #e5e7eb;
+      padding: 4px 6px;
+      white-space: nowrap;
+    }
+
+    .history-mini-table th {
+      background: #f9fafb;
+      font-weight: 600;
+    }
+
+    .history-mini-table tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 8px;
+        padding: 16px;
+      }
+
+      table {
+        font-size: 11px;
+      }
+
+      th, td {
+        padding: 4px 6px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+
+	/* 按鈕內的 SVG icon 共用設定 */
+.btn svg {
+  margin-right: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 主按鈕（藍底）→ 白色 icon */
+.btn-primary svg {
+  stroke: #ffffff;
+  fill: none;
+}
+
+/* 次按鈕（灰底）→ 品牌深藍 icon */
+.btn-secondary svg {
+  stroke: #0f1e3b;   /* 與 Header 完全同色 */
+  fill: none;
+}
+
+    }
+
+
+  </style>
+</head>
+<body>
+
+<!-- CREAT 深藍品牌 Header -->
+<header class="creat-header">
+  <div class="creat-header-left">
+
+    <!-- 你的個人品牌 LOGO -->
+    <img src="Profile-LOGO.png" alt="Personal Logo" class="creat-logo">
+
+    <div>
+      <div class="creat-header-title">運動貼紮耗材估算器</div>
+      <div class="creat-role" style="margin-top:2px;">Personal Athletic Training Utility</div>
+    </div>
+  </div>
+
+  <div class="creat-header-right">
+    <div class="creat-maker">製作者｜張雅婷</div>
+    <div class="creat-role">NTNU Athletic Trainer</div>
+  </div>
+</header>
+
+
+<div class="container">
+  <div class="subtitle">
+    輸入貼紮方式、選手人數與比賽場次，系統會幫你估算每種貼布需要準備的卷數，並可儲存歷史紀錄方便追蹤。
+  </div>
+
+  <!-- 比賽基本資訊 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">比賽基本資訊</div>
+      <div class="section-note">這些資訊會一起保存到歷史紀錄中</div>
+    </div>
+
+    <div class="grid" style="grid-template-columns: 2fr 1fr 1.2fr;">
+      <div>
+        <label for="eventName">活動名稱</label>
+        <input id="eventName" type="text" placeholder="例如：113 學年度 UBA 複賽">
+      </div>
+      <div>
+        <label for="eventLocation">比賽地點</label>
+        <input id="eventLocation" type="text" placeholder="例如：台北體育館">
+      </div>
+      <div>
+        <label>比賽日期（起訖）</label>
+        <div style="display:flex; gap:6px;">
+          <input id="eventStartDate" type="date" style="flex:1;">
+          <input id="eventEndDate" type="date" style="flex:1;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 貼紮計畫 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">貼紮計畫</div>
+      <div class="section-note">
+        每一列代表「某種貼紮＋某一種貼布」。若同一種貼紮需要多種貼布，可新增多列，貼紮名稱填一樣、貼布種類選不同。
+      </div>
+    </div>
+
+    <div class="plan-table-wrapper">
+      <table id="planTable">
+        <thead>
+        <tr>
+          <th>貼紮名稱</th>
+          <th>貼布種類</th>
+          <th>每次約用幾卷</th>
+          <th>運動員人數</th>
+          <th>每人每場次貼幾次</th>
+          <th>比賽場次</th>
+          <th>刪除</th>
+        </tr>
+        </thead>
+        <tbody id="planTableBody">
+        <!-- JS 產生 -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="actions-row">
+      <button class="btn btn-secondary" id="addRowBtn">
+        <span class="btn-icon">＋</span> 新增貼紮方式
+      </button>
+    </div>
+  </div>
+
+  <!-- 計算結果 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">計算結果</div>
+      <div class="section-note">依貼布種類彙總，數量已自動進位（向上取整數卷）</div>
+    </div>
+
+    <!-- 安全緩衝設定 -->
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div style="font-size:12px; color:#4b5563;">
+        安全緩衝：在計算結果上額外增加一定百分比的備料量（例如 10%）。
+      </div>
+      <div style="display:flex; align-items:center; gap:6px;">
+        <label for="bufferPercent" style="margin:0; font-size:13px;">安全緩衝(%)</label>
+        <input id="bufferPercent" type="number" min="0" step="1" value="10" style="width:80px;">
+      </div>
+    </div>
+
+    <div class="actions-row">
+
+  <!-- 計算耗材（白色 icon） -->
+  <button class="btn btn-primary" id="calculateBtn">
+    <svg width="14" height="14" viewBox="0 0 24 24"
+         xmlns="http://www.w3.org/2000/svg"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 小計算機 icon -->
+      <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+      <line x1="8" y1="7" x2="16" y2="7"></line>
+      <line x1="8" y1="11" x2="8" y2="11"></line>
+      <line x1="12" y1="11" x2="12" y2="11"></line>
+      <line x1="16" y1="11" x2="16" y2="11"></line>
+      <line x1="8" y1="15" x2="8" y2="15"></line>
+      <line x1="12" y1="15" x2="12" y2="15"></line>
+      <line x1="16" y1="15" x2="16" y2="15"></line>
+    </svg>
+    計算耗材
+  </button>
+
+  <!-- 儲存紀錄（品牌深藍 icon） -->
+  <button class="btn btn-secondary" id="saveHistoryBtn">
+    <svg width="14" height="14" viewBox="0 0 24 24"
+         xmlns="http://www.w3.org/2000/svg"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- save icon -->
+      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+      <polyline points="17 21 17 13 7 13 7 21"></polyline>
+      <polyline points="7 3 7 8 15 8"></polyline>
+    </svg>
+    儲存紀錄
+  </button>
+
+</div>
+
+
+    <div id="outputArea">
+      <div class="empty-text" id="noOutputText">尚未產生計算結果，請先點選「計算卷數」。</div>
+      <div class="output-table" id="outputTableWrapper" style="display:none;">
+        <table id="outputTable">
+          <thead>
+          <tr>
+            <th>貼布種類</th>
+            <th>估計需要卷數（含安全緩衝）</th>
+          </tr>
+          </thead>
+          <tbody id="outputTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 歷史紀錄 -->
+  <div class="section">
+    <div class="history-header-row">
+      <div class="section-title">
+        歷史紀錄
+        <span class="tag">僅儲存在本機瀏覽器</span>
+      </div>
+      <button class="btn btn-danger" id="clearHistoryBtn">
+        <span class="btn-icon">🗑</span> 清除所有歷史
+      </button>
+    </div>
+    <div class="small-text">
+      點擊卡片可以展開詳細內容，也可以一鍵把當時的設定套用回上方表單。
+    </div>
+
+    <div id="historyArea">
+      <div class="empty-text" id="noHistoryText">目前沒有任何歷史紀錄。</div>
+      <div class="history-list" id="historyList" style="display:none;">
+        <!-- JS 產生卡片 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const TAPE_TYPES = [
+    "蕾絲墊",
+    "皮膚膜",
+    "白貼-1.5吋",
+    "重彈-3吋",
+    "重彈-2吋",
+    "輕彈-2吋",
+    "輕彈-1.5吋",
+    "輕彈-1吋",
+    "肌貼",
+    "膚色動態貼布-小",
+    "膚色動態貼布-大",
+    "Echo動態貼布-小",
+    "Echo動態貼布-大",
+    "雷可覆蓋貼布",
+    "雷可",
+    "自黏貼布",
+    "泡棉軟墊",
+    "其他"
+  ];
+
+  const STORAGE_KEY = "tapeUsageHistory_v1_5";
+  let historyData = [];
+
+  function createSelect(options, value) {
+    const select = document.createElement("select");
+    options.forEach(opt => {
+      const option = document.createElement("option");
+      option.value = opt;
+      option.textContent = opt;
+      if (opt === value) option.selected = true;
+      select.appendChild(option);
+    });
+    return select;
+  }
+
+  function addPlanRow(defaultData = {}) {
+    const tbody = document.getElementById("planTableBody");
+    const tr = document.createElement("tr");
+
+    const tdName = document.createElement("td");
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "例如：踝關節貼紮";
+    nameInput.value = defaultData.name || "";
+    tdName.appendChild(nameInput);
+
+    const tdType = document.createElement("td");
+    const typeSelect = createSelect(TAPE_TYPES, defaultData.type || TAPE_TYPES[0]);
+    tdType.appendChild(typeSelect);
+
+    const tdRollPer = document.createElement("td");
+    const rollInput = document.createElement("input");
+    rollInput.type = "number";
+    rollInput.min = "0";
+    rollInput.step = "0.05";
+    rollInput.placeholder = "例如：0.30";
+    rollInput.value = defaultData.rollsPerUse != null ? defaultData.rollsPerUse : "";
+    tdRollPer.appendChild(rollInput);
+
+    const tdAthletes = document.createElement("td");
+    const athletesInput = document.createElement("input");
+    athletesInput.type = "number";
+    athletesInput.min = "0";
+    athletesInput.step = "1";
+    athletesInput.placeholder = "例如：8";
+    athletesInput.value = defaultData.athletes != null ? defaultData.athletes : "";
+    tdAthletes.appendChild(athletesInput);
+
+    const tdTimes = document.createElement("td");
+    const timesInput = document.createElement("input");
+    timesInput.type = "number";
+    timesInput.min = "0";
+    timesInput.step = "1";
+    timesInput.placeholder = "通常為 1";
+    timesInput.value = defaultData.timesPerGame != null ? defaultData.timesPerGame : "1";
+    tdTimes.appendChild(timesInput);
+
+    const tdGames = document.createElement("td");
+    const gamesInput = document.createElement("input");
+    gamesInput.type = "number";
+    gamesInput.min = "0";
+    gamesInput.step = "1";
+    gamesInput.placeholder = "例如：3";
+    gamesInput.value = defaultData.games != null ? defaultData.games : "";
+    tdGames.appendChild(gamesInput);
+
+    const tdDelete = document.createElement("td");
+    const delBtn = document.createElement("button");
+    delBtn.className = "btn btn-danger";
+    delBtn.type = "button";
+    delBtn.innerHTML = '<span class="btn-icon">✕</span>';
+    delBtn.addEventListener("click", () => {
+      tr.remove();
+    });
+    tdDelete.appendChild(delBtn);
+
+    tr.appendChild(tdName);
+    tr.appendChild(tdType);
+    tr.appendChild(tdRollPer);
+    tr.appendChild(tdAthletes);
+    tr.appendChild(tdTimes);
+    tr.appendChild(tdGames);
+    tr.appendChild(tdDelete);
+
+    tbody.appendChild(tr);
+  }
+
+  function getPlanRows() {
+    const rows = [];
+    const tbody = document.getElementById("planTableBody");
+    Array.from(tbody.rows).forEach(tr => {
+      const [nameTd, typeTd, rollTd, athletesTd, timesTd, gamesTd] = tr.cells;
+      const name = nameTd.querySelector("input").value.trim();
+      const type = typeTd.querySelector("select").value;
+      const rollsPerUse = parseFloat(rollTd.querySelector("input").value);
+      const athletes = parseInt(athletesTd.querySelector("input").value, 10);
+      const timesPerGame = parseInt(timesTd.querySelector("input").value, 10);
+      const games = parseInt(gamesTd.querySelector("input").value, 10);
+
+      if (!name && (isNaN(rollsPerUse) || isNaN(athletes) || isNaN(timesPerGame) || isNaN(games))) {
+        return;
+      }
+
+      rows.push({
+        name: name || "(未命名貼紮)",
+        type,
+        rollsPerUse: isNaN(rollsPerUse) ? 0 : rollsPerUse,
+        athletes: isNaN(athletes) ? 0 : athletes,
+        timesPerGame: isNaN(timesPerGame) ? 0 : timesPerGame,
+        games: isNaN(games) ? 0 : games
+      });
+    });
+    return rows;
+  }
+
+  function getBufferPercent() {
+    const input = document.getElementById("bufferPercent");
+    if (!input) return 0;
+    const val = parseFloat(input.value);
+    if (isNaN(val) || val < 0) return 0;
+    return val;
+  }
+
+  function summarizeUsage(rows, bufferPercent) {
+    const byTapeTypeBase = {};
+    rows.forEach(row => {
+      const base = row.rollsPerUse * row.athletes * row.timesPerGame * row.games;
+      if (!byTapeTypeBase[row.type]) {
+        byTapeTypeBase[row.type] = 0;
+      }
+      byTapeTypeBase[row.type] += base;
+    });
+
+    const byTapeType = {};
+    const factor = 1 + (bufferPercent || 0) / 100;
+    Object.keys(byTapeTypeBase).forEach(type => {
+      byTapeType[type] = Math.ceil(byTapeTypeBase[type] * factor);
+    });
+
+    return { byTapeType };
+  }
+
+  function renderOutput(byTapeType) {
+    const noOutputText = document.getElementById("noOutputText");
+    const wrapper = document.getElementById("outputTableWrapper");
+    const tbody = document.getElementById("outputTableBody");
+
+    tbody.innerHTML = "";
+
+    const types = Object.keys(byTapeType);
+    if (!types.length) {
+      noOutputText.style.display = "block";
+      wrapper.style.display = "none";
+      return;
+    }
+
+    types.forEach(type => {
+      const tr = document.createElement("tr");
+      const tdType = document.createElement("td");
+      tdType.textContent = type;
+
+      const tdQty = document.createElement("td");
+      tdQty.textContent = byTapeType[type] + " 卷";
+
+      tr.appendChild(tdType);
+      tr.appendChild(tdQty);
+      tbody.appendChild(tr);
+    });
+
+    noOutputText.style.display = "none";
+    wrapper.style.display = "block";
+  }
+
+  function calculateAndRender() {
+    const rows = getPlanRows();
+    const bufferPercent = getBufferPercent();
+    const { byTapeType } = summarizeUsage(rows, bufferPercent);
+    renderOutput(byTapeType);
+    return byTapeType;
+  }
+
+  function loadHistory() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      historyData = raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      historyData = [];
+    }
+    renderHistory();
+  }
+
+  function saveHistory() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(historyData));
+  }
+
+  function buildTapeSummaryText(byTapeType) {
+    const types = Object.keys(byTapeType || {});
+    if (!types.length) return "尚無貼布用量資料";
+    const parts = types.slice(0, 3).map(t => `${t} ${byTapeType[t]}卷`);
+    if (types.length > 3) parts.push(`…共 ${types.length} 種貼布`);
+    return parts.join("、");
+  }
+
+  function applyRecordToForm(record) {
+    document.getElementById("eventName").value = record.eventName || "";
+    document.getElementById("eventLocation").value = record.eventLocation || "";
+    const startEnd = (record.dateRange || "").split(" 至 ");
+    document.getElementById("eventStartDate").value = startEnd[0] || "";
+    document.getElementById("eventEndDate").value = startEnd[1] || "";
+    document.getElementById("bufferPercent").value =
+      record.bufferPercent != null ? record.bufferPercent : 10;
+
+    const tbody = document.getElementById("planTableBody");
+    tbody.innerHTML = "";
+    (record.rows || []).forEach(r => addPlanRow(r));
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function renderHistory() {
+    const noHistoryText = document.getElementById("noHistoryText");
+    const list = document.getElementById("historyList");
+
+    list.innerHTML = "";
+
+    if (!historyData.length) {
+      noHistoryText.style.display = "block";
+      list.style.display = "none";
+      return;
+    }
+
+    historyData.slice().reverse().forEach(item => {
+      const card = document.createElement("div");
+      card.className = "history-card";
+
+      const header = document.createElement("div");
+      header.className = "history-card-header";
+
+      const headerMain = document.createElement("div");
+      headerMain.className = "history-header-main";
+
+      const titleLine = document.createElement("div");
+      titleLine.className = "history-title-line";
+      const dateText = item.dateRange || "-";
+      const eventText = item.eventName || "(未命名活動)";
+      const locationText = item.eventLocation || "";
+      titleLine.textContent = `${dateText} ｜ ${eventText}${locationText ? " ｜ " + locationText : ""}`;
+
+      const subLine = document.createElement("div");
+      subLine.className = "history-sub-line";
+      const bufferPercent = item.bufferPercent != null ? item.bufferPercent : 0;
+      subLine.textContent =
+        buildTapeSummaryText(item.byTapeType || {}) +
+        (bufferPercent > 0 ? `（含安全緩衝 ${bufferPercent}%）` : "");
+
+      headerMain.appendChild(titleLine);
+      headerMain.appendChild(subLine);
+
+      const toggleIcon = document.createElement("div");
+      toggleIcon.className = "history-toggle-icon";
+      toggleIcon.textContent = "＋";
+
+      header.appendChild(headerMain);
+      header.appendChild(toggleIcon);
+
+      const body = document.createElement("div");
+      body.className = "history-card-body";
+
+      const infoTitle = document.createElement("div");
+      infoTitle.className = "history-section-title";
+      infoTitle.textContent = "活動資訊";
+      body.appendChild(infoTitle);
+
+      const infoText = document.createElement("div");
+      infoText.style.fontSize = "11px";
+      infoText.style.color = "#4b5563";
+      infoText.innerHTML =
+        `活動名稱：${eventText || "-"}<br>` +
+        `比賽地點：${locationText || "-"}<br>` +
+        `日期：${dateText || "-"}<br>` +
+        `安全緩衝：${bufferPercent || 0}%`;
+      body.appendChild(infoText);
+
+      const detailTitle = document.createElement("div");
+      detailTitle.className = "history-section-title";
+      detailTitle.style.marginTop = "10px";
+      detailTitle.textContent = "貼紮詳細列表";
+      body.appendChild(detailTitle);
+
+      const detailTable = document.createElement("table");
+      detailTable.className = "history-mini-table";
+
+      const dtHead = document.createElement("thead");
+      dtHead.innerHTML =
+        "<tr>" +
+        "<th>貼紮名稱</th>" +
+        "<th>貼布種類</th>" +
+        "<th>每次用量(卷)</th>" +
+        "<th>人數</th>" +
+        "<th>每人每場次</th>" +
+        "<th>場次</th>" +
+        "<th>估計總卷數（未加緩衝）</th>" +
+        "</tr>";
+      detailTable.appendChild(dtHead);
+
+      const dtBody = document.createElement("tbody");
+      (item.rows || []).forEach(r => {
+        const tr = document.createElement("tr");
+        const totalRolls = r.rollsPerUse * r.athletes * r.timesPerGame * r.games;
+        tr.innerHTML =
+          `<td>${r.name}</td>` +
+          `<td>${r.type}</td>` +
+          `<td>${r.rollsPerUse || 0}</td>` +
+          `<td>${r.athletes || 0}</td>` +
+          `<td>${r.timesPerGame || 0}</td>` +
+          `<td>${r.games || 0}</td>` +
+          `<td>${totalRolls.toFixed(2)}</td>`;
+        dtBody.appendChild(tr);
+      });
+      detailTable.appendChild(dtBody);
+      body.appendChild(detailTable);
+
+      const sumTitle = document.createElement("div");
+      sumTitle.className = "history-section-title";
+      sumTitle.style.marginTop = "10px";
+      sumTitle.textContent = "貼布彙總（含安全緩衝）";
+      body.appendChild(sumTitle);
+
+      const sumTable = document.createElement("table");
+      sumTable.className = "history-mini-table";
+
+      const stHead = document.createElement("thead");
+      stHead.innerHTML = "<tr><th>貼布種類</th><th>估計需要卷數</th></tr>";
+      sumTable.appendChild(stHead);
+
+      const stBody = document.createElement("tbody");
+      Object.keys(item.byTapeType || {}).forEach(type => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${type}</td><td>${item.byTapeType[type]} 卷</td>`;
+        stBody.appendChild(tr);
+      });
+      sumTable.appendChild(stBody);
+      body.appendChild(sumTable);
+
+      const btnRow = document.createElement("div");
+      btnRow.style.marginTop = "8px";
+      btnRow.style.display = "flex";
+      btnRow.style.justifyContent = "flex-end";
+      const applyBtn = document.createElement("button");
+      applyBtn.className = "btn btn-secondary";
+      applyBtn.type = "button";
+      applyBtn.textContent = "套用這筆設定到上方表單";
+      applyBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        applyRecordToForm(item);
+      });
+      btnRow.appendChild(applyBtn);
+      body.appendChild(btnRow);
+
+      header.addEventListener("click", () => {
+        const isOpen = body.style.display === "block";
+        body.style.display = isOpen ? "none" : "block";
+        toggleIcon.textContent = isOpen ? "＋" : "－";
+      });
+
+      card.appendChild(header);
+      card.appendChild(body);
+      list.appendChild(card);
+    });
+
+    noHistoryText.style.display = "none";
+    list.style.display = "flex";
+  }
+
+  function saveCurrentToHistory() {
+    const eventName = document.getElementById("eventName").value.trim();
+    const eventLocation = document.getElementById("eventLocation").value.trim();
+    const startDate = document.getElementById("eventStartDate").value;
+    const endDate = document.getElementById("eventEndDate").value;
+
+    const rows = getPlanRows();
+    if (!rows.length) {
+      alert("請先輸入至少一列貼紮資料。");
+      return;
+    }
+
+    const bufferPercent = getBufferPercent();
+    const { byTapeType } = summarizeUsage(rows, bufferPercent);
+    if (!Object.keys(byTapeType).length) {
+      alert("目前資料無法計算出耗材量，請確認各欄位是否有填寫。");
+      return;
+    }
+
+    let dateRange = "";
+    if (startDate && endDate) {
+      dateRange = `${startDate} 至 ${endDate}`;
+    } else {
+      dateRange = startDate || endDate || "";
+    }
+
+    const record = {
+      id: Date.now(),
+      dateRange,
+      eventName: eventName || "",
+      eventLocation: eventLocation || "",
+      rows,
+      byTapeType,
+      bufferPercent
+    };
+
+    historyData.push(record);
+    saveHistory();
+    renderHistory();
+    renderOutput(byTapeType);
+    alert("已儲存到歷史紀錄！");
+  }
+
+  function clearHistory() {
+    if (!historyData.length) return;
+    const ok = confirm("確定要刪除所有歷史紀錄嗎？此動作無法復原。");
+    if (!ok) return;
+    historyData = [];
+    saveHistory();
+    renderHistory();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    addPlanRow({
+      name: "踝關節貼紮",
+      type: "白貼-1.5吋",
+      rollsPerUse: 0.3,
+      athletes: 8,
+      timesPerGame: 1,
+      games: 3
+    });
+
+    document.getElementById("addRowBtn").addEventListener("click", () => addPlanRow());
+    document.getElementById("calculateBtn").addEventListener("click", calculateAndRender);
+    document.getElementById("saveHistoryBtn").addEventListener("click", saveCurrentToHistory);
+    document.getElementById("clearHistoryBtn").addEventListener("click", clearHistory);
+
+    loadHistory();
+  });
+</script>
+
+</body>
+</html>
